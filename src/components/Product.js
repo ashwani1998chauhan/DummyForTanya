@@ -1,0 +1,174 @@
+import React, { useState, useEffect } from 'react';
+import './Product.css';
+
+const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [editProductId, setEditProductId] = useState(null);
+  const [editedProduct, setEditedProduct] = useState({
+    id: null,
+    prodName: '',
+    price: '',
+    brand: '',
+  });
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5297/api/Products');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error.message);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleEdit = (id) => {
+    // Set the product ID to edit
+    setEditProductId(id);
+
+    // Find the product to edit
+    const productToEdit = products.find((product) => product.id === id);
+
+    // Set the initial values for the edit form
+    setEditedProduct({
+      id: productToEdit.id,
+      prodName: productToEdit.prodName,
+      price: productToEdit.price,
+      brand: productToEdit.brand,
+    });
+  };
+
+  const handleEditSubmit = async () => {
+    try {
+      // Implement your logic to update the product on the backend using editedProduct
+      console.log(`Edit product with ID: ${editProductId} and data:`, editedProduct);
+
+      // Clear the editProductId to close the edit form
+      setEditProductId(null);
+
+      // Fetch the updated product list from the backend
+      const updatedResponse = await fetch('http://localhost:5297/api/Products');
+
+      if (!updatedResponse.ok) {
+        throw new Error('Failed to fetch updated products');
+      }
+
+      const updatedData = await updatedResponse.json();
+      setProducts(updatedData);
+    } catch (error) {
+      console.error('Error editing product:', error.message);
+    }
+  };
+
+  const handleEditCancel = () => {
+    // Clear the editProductId to close the edit form
+    setEditProductId(null);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      try {
+        const deleteResponse = await fetch(`http://localhost:5297/api/Products/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!deleteResponse.ok) {
+          throw new Error('Failed to delete product');
+        }
+
+        // If deletion is successful, update the products state
+        setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
+
+        console.log(`Delete product with ID: ${id}`);
+      } catch (error) {
+        console.error('Error deleting product:', error.message);
+      }
+    }
+  };
+
+  return (
+    <div>
+      <h2 className='heading'>Products</h2>
+      {products.length > 0 ? (
+        <table className="product-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Brand</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.prodName}</td>
+                <td>${product.price.toFixed(2)}</td>
+                <td>{product.brand}</td>
+                <td>
+                  <button onClick={() => handleEdit(product.id)}>Edit</button>
+                  <button onClick={() => handleDelete(product.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No products available</p>
+      )}
+
+      {/* Render the edit form conditionally */}
+      {editProductId && (
+        <div className="edit-form">
+          <h3>Edit Product</h3>
+          <form onSubmit={handleEditSubmit}>
+            <label htmlFor="prodName">Name:</label>
+            <input
+              type="text"
+              id="prodName"
+              name="prodName"
+              value={editedProduct.prodName}
+              onChange={(e) => setEditedProduct({ ...editedProduct, prodName: e.target.value })}
+            />
+
+            <label htmlFor="price">Price:</label>
+            <input
+              type="text"
+              id="price"
+              name="price"
+              value={editedProduct.price}
+              onChange={(e) => setEditedProduct({ ...editedProduct, price: e.target.value })}
+            />
+
+            <label htmlFor="brand">Brand:</label>
+            <input
+              type="text"
+              id="brand"
+              name="brand"
+              value={editedProduct.brand}
+              onChange={(e) => setEditedProduct({ ...editedProduct, brand: e.target.value })}
+            />
+
+            <button type="submit">Save Changes</button>
+            <button type="button" onClick={handleEditCancel}>Cancel</button>
+          </form>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Products;
