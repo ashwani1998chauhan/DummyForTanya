@@ -1,4 +1,3 @@
-/* Home.css */
 .home-container {
     max-width: 800px;
     margin: 0 auto;
@@ -40,12 +39,12 @@
     border-radius: 8px;
     margin: 0 10px;
     background-color: #f9f9f9;
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Added transition for background-color */
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; 
   }
   
   .highlight-item:hover {
-    transform: scale(1.15); /* Scale up when hovered */
-    background-color: #e0e0e0; /* Change background color on hover */
+    transform: scale(1.15); 
+    background-color: #e0e0e0; 
   }
   
   .highlight-item h2 {

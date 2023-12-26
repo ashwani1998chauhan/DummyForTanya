@@ -1,95 +1,100 @@
-/* Product.css */
-
-.product-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+body, h1, h2, h3, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
 }
+
+body {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #fff; 
+
+}
+
+
 
 .product-table {
-  width: 100%;
-  margin-top: 20px;
+  width: 75%;
+  margin-top: 30px;
   border-collapse: collapse;
+  text-align: center;
+  margin-left: 15%;
 }
-
+  
 .product-table th,
 .product-table td {
   border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-  transition: transform 0.2s ease-in-out;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  color: black ;
 }
 
-.product-table th {
-  background-color: #f2f2f2;
-}
 
-.product-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
 
 .product-table tbody tr:hover {
   background-color: #ddd;
-  transform: scale(1.05);
+  transform: scale(1.03);
+  color: #fff; 
 }
 
 .heading {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 30px;
+  color: #fff; 
 }
 
 .edit-form {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+
+  border: 2px solid white;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  color: black; 
 }
 
 .edit-form h3 {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .edit-form label {
-  display: block;
-  margin-bottom: 8px;
+  display: inline;
+  margin-bottom: 10px;
+  color: black; 
 }
 
 .edit-form input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
+  width: calc(100% - 16px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid black;
   border-radius: 4px;
 }
 
 .edit-form button {
   display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
+  width: 30%;
+  padding: 12px;
+  color: black;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 0 auto; /* Center align the button */
 }
 
-.edit-form button:hover {
-  background-color: #0056b3;
-}
 
 .edit-form button[type="button"] {
-  background-color: #ccc;
-  margin-top: 10px;
+  background-color: lightgrey;
+  margin-top: 15px;
 }
 
 .edit-form button[type="button"]:hover {
-  background-color: #999;
+  background-color: lightgreen;
 }
 
 button {
-  margin-right: 5px;
+  margin-right: 8px;
 }

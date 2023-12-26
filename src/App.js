@@ -1,18 +1,18 @@
-// App.js
+// App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Home from './components/Home';
-import Products from './components/Product'; // Assuming 'Product.js' is your product component
+import Products from './components/Product'; 
 import ContactUs from './components/ContactUs';
 import NotFound from './components/NotFound';
 import "./NavBar.css";
+import "./App.css"; // Import the CSS file
 
 const App = () => {
   return (
     <Router>
       <div>
         <nav className="navbar">
-          
           <ul className="navbar-links">
             <li><Link to="/" className="nav-link">Home</Link></li>
             <li><Link to="/products" className="nav-link">Products</Link></li>
